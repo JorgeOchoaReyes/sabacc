@@ -1,3 +1,5 @@
+import '@tanstack/react-start/server-only'
+
 import firebase from "firebase-admin";
 import { getAuth } from "firebase-admin/auth";
 import { getFirestore } from "firebase-admin/firestore";
