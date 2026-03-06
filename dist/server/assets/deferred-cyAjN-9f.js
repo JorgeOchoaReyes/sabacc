@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { d as deferredQueryOptions } from "./router--689VTfQ.js";
+import { d as deferredQueryOptions } from "./router-BQYUG8IQ.js";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { useState, Suspense } from "react";
 import "@tanstack/react-router";
@@ -9,7 +9,10 @@ import "@tanstack/react-router-devtools";
 import "firebase/auth";
 import "firebase/app";
 import "lucide-react";
-import "redaxios";
+import "firebase-admin";
+import "firebase-admin/auth";
+import "firebase-admin/firestore";
+import "firebase-admin/storage";
 function Deferred() {
   const [count, setCount] = useState(0);
   return /* @__PURE__ */ jsxs("div", { className: "p-2", children: [

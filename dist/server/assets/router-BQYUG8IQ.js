@@ -9,7 +9,10 @@ import { useContext, useState, useEffect } from "react";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 import { Gamepad } from "lucide-react";
-import axios from "redaxios";
+import firebase from "firebase-admin";
+import { getAuth as getAuth$1 } from "firebase-admin/auth";
+import { getFirestore } from "firebase-admin/firestore";
+import { getStorage } from "firebase-admin/storage";
 function DefaultCatchBoundary({ error }) {
   const router2 = useRouter();
   const isRoot = useMatch({
@@ -75,7 +78,7 @@ function NotFound({ children }) {
     ] })
   ] });
 }
-const appCss = "/assets/app--WtsqnG7.css";
+const appCss = "/assets/app-C1NPmaXa.css";
 const seo = ({
   title,
   description,
@@ -110,8 +113,8 @@ const firebaseConfig = {
   appId: "1:206710874149:web:abc0c16169b77e7bf75fcc",
   measurementId: "G-ZXK41GBCRV"
 };
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+const app$1 = initializeApp(firebaseConfig);
+const auth = getAuth(app$1);
 const AuthContext = React.createContext({
   user: null,
   loading: true
@@ -279,7 +282,7 @@ function RootDocument({ children }) {
     ] })
   ] });
 }
-const $$splitComponentImporter$8 = () => import("./login-BHxi9z7V.js");
+const $$splitComponentImporter$8 = () => import("./login-B576gdp2.js");
 const Route$9 = createFileRoute("/login")({
   component: lazyRouteComponent($$splitComponentImporter$8, "component")
 });
@@ -298,7 +301,7 @@ const deferredQueryOptions = () => queryOptions({
     };
   }
 });
-const $$splitComponentImporter$6 = () => import("./deferred-CMNEmDvO.js");
+const $$splitComponentImporter$6 = () => import("./deferred-cyAjN-9f.js");
 const Route$7 = createFileRoute("/deferred")({
   loader: ({
     context
@@ -315,22 +318,33 @@ const $$splitComponentImporter$4 = () => import("./_pathlessLayout-BKuQagRO.js")
 const Route$5 = createFileRoute("/_pathlessLayout")({
   component: lazyRouteComponent($$splitComponentImporter$4, "component")
 });
-const $$splitComponentImporter$3 = () => import("./index-CL-gOFfa.js");
+const $$splitComponentImporter$3 = () => import("./index-Diir-Aw-.js");
 const Route$4 = createFileRoute("/")({
   component: lazyRouteComponent($$splitComponentImporter$3, "component")
 });
+const serviceAccount = JSON.parse(process.env.GCP_SERVICE_ACCOUNT);
+const app = firebase.apps.length === 0 ? firebase.initializeApp({
+  credential: firebase.credential.cert(serviceAccount)
+}) : firebase.app();
+getAuth$1(app);
+const db = getFirestore(app);
+getStorage(app);
 const Route$3 = createFileRoute("/api/users")({
   server: {
     handlers: {
       GET: async ({ request }) => {
-        console.info("Fetching users... @", request.url);
-        const res = await axios.get(
-          "https://jsonplaceholder.typicode.com/users"
-        );
-        const list = res.data.slice(0, 10);
-        return Response.json(
-          list.map((u) => ({ id: u.id, name: u.name, email: u.email }))
-        );
+        try {
+          const data = await db.collection("test").doc("test").get();
+          return Response.json(
+            data.data()
+          );
+        } catch (error) {
+          console.error(error);
+          return Response.json(
+            { error },
+            { status: 500 }
+          );
+        }
       }
     }
   }
