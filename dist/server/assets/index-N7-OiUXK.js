@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { Link } from "@tanstack/react-router";
-import { u as useAuth } from "./router-BQYUG8IQ.js";
+import { u as useAuth } from "./router-Df20rmTh.js";
 import "@tanstack/react-query";
 import "@tanstack/react-router-ssr-query";
 import "@tanstack/react-query-devtools";

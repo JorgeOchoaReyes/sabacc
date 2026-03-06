@@ -282,7 +282,7 @@ function RootDocument({ children }) {
     ] })
   ] });
 }
-const $$splitComponentImporter$8 = () => import("./login-B576gdp2.js");
+const $$splitComponentImporter$8 = () => import("./login-ClNpZlSJ.js");
 const Route$9 = createFileRoute("/login")({
   component: lazyRouteComponent($$splitComponentImporter$8, "component")
 });
@@ -301,7 +301,7 @@ const deferredQueryOptions = () => queryOptions({
     };
   }
 });
-const $$splitComponentImporter$6 = () => import("./deferred-cyAjN-9f.js");
+const $$splitComponentImporter$6 = () => import("./deferred-zkytCCjm.js");
 const Route$7 = createFileRoute("/deferred")({
   loader: ({
     context
@@ -318,11 +318,11 @@ const $$splitComponentImporter$4 = () => import("./_pathlessLayout-BKuQagRO.js")
 const Route$5 = createFileRoute("/_pathlessLayout")({
   component: lazyRouteComponent($$splitComponentImporter$4, "component")
 });
-const $$splitComponentImporter$3 = () => import("./index-Diir-Aw-.js");
+const $$splitComponentImporter$3 = () => import("./index-N7-OiUXK.js");
 const Route$4 = createFileRoute("/")({
   component: lazyRouteComponent($$splitComponentImporter$3, "component")
 });
-const serviceAccount = JSON.parse(process.env.GCP_SERVICE_ACCOUNT);
+const serviceAccount = JSON.parse(process.env.GCP_SERVICE_ACCOUNT.replace(/\\n/g, "\n"));
 const app = firebase.apps.length === 0 ? firebase.initializeApp({
   credential: firebase.credential.cert(serviceAccount)
 }) : firebase.app();
