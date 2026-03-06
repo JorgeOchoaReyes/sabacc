@@ -5,7 +5,7 @@ import { getAuth } from "firebase-admin/auth";
 import { getFirestore } from "firebase-admin/firestore";
 import { getStorage } from "firebase-admin/storage";
 
-const serviceAccount = JSON.parse(process.env.GCP_SERVICE_ACCOUNT!) as firebase.ServiceAccount;
+const serviceAccount = JSON.parse(process.env.GCP_SERVICE_ACCOUNT!.replace(/\\n/g, '\n')) as firebase.ServiceAccount;
 
 const app = firebase.apps.length === 0 ? firebase.initializeApp({
     credential: firebase.credential.cert(serviceAccount),

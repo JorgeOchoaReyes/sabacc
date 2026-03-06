@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useRouter } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
-import { u as useAuth, a as auth } from "./router--689VTfQ.js";
+import { u as useAuth, a as auth } from "./router-BQYUG8IQ.js";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { ArrowLeft } from "lucide-react";
 import "@tanstack/react-query";
@@ -9,7 +9,10 @@ import "@tanstack/react-router-ssr-query";
 import "@tanstack/react-query-devtools";
 import "@tanstack/react-router-devtools";
 import "firebase/app";
-import "redaxios";
+import "firebase-admin";
+import "firebase-admin/auth";
+import "firebase-admin/firestore";
+import "firebase-admin/storage";
 function Login() {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
