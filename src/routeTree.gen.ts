@@ -9,7 +9,6 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as RedirectRouteImport } from './routes/redirect'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as GameRouteImport } from './routes/game'
 import { Route as DeferredRouteImport } from './routes/deferred'
@@ -21,11 +20,6 @@ import { Route as PathlessLayoutNestedLayoutRouteImport } from './routes/_pathle
 import { Route as PathlessLayoutNestedLayoutRouteBRouteImport } from './routes/_pathlessLayout/_nested-layout/route-b'
 import { Route as PathlessLayoutNestedLayoutRouteARouteImport } from './routes/_pathlessLayout/_nested-layout/route-a'
 
-const RedirectRoute = RedirectRouteImport.update({
-  id: '/redirect',
-  path: '/redirect',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
@@ -84,7 +78,6 @@ export interface FileRoutesByFullPath {
   '/deferred': typeof DeferredRoute
   '/game': typeof GameRoute
   '/login': typeof LoginRoute
-  '/redirect': typeof RedirectRoute
   '/api/users': typeof ApiUsersRoute
   '/route-a': typeof PathlessLayoutNestedLayoutRouteARoute
   '/route-b': typeof PathlessLayoutNestedLayoutRouteBRoute
@@ -95,7 +88,6 @@ export interface FileRoutesByTo {
   '/deferred': typeof DeferredRoute
   '/game': typeof GameRoute
   '/login': typeof LoginRoute
-  '/redirect': typeof RedirectRoute
   '/api/users': typeof ApiUsersRoute
   '/route-a': typeof PathlessLayoutNestedLayoutRouteARoute
   '/route-b': typeof PathlessLayoutNestedLayoutRouteBRoute
@@ -108,7 +100,6 @@ export interface FileRoutesById {
   '/deferred': typeof DeferredRoute
   '/game': typeof GameRoute
   '/login': typeof LoginRoute
-  '/redirect': typeof RedirectRoute
   '/_pathlessLayout/_nested-layout': typeof PathlessLayoutNestedLayoutRouteWithChildren
   '/api/users': typeof ApiUsersRoute
   '/_pathlessLayout/_nested-layout/route-a': typeof PathlessLayoutNestedLayoutRouteARoute
@@ -122,7 +113,6 @@ export interface FileRouteTypes {
     | '/deferred'
     | '/game'
     | '/login'
-    | '/redirect'
     | '/api/users'
     | '/route-a'
     | '/route-b'
@@ -133,7 +123,6 @@ export interface FileRouteTypes {
     | '/deferred'
     | '/game'
     | '/login'
-    | '/redirect'
     | '/api/users'
     | '/route-a'
     | '/route-b'
@@ -145,7 +134,6 @@ export interface FileRouteTypes {
     | '/deferred'
     | '/game'
     | '/login'
-    | '/redirect'
     | '/_pathlessLayout/_nested-layout'
     | '/api/users'
     | '/_pathlessLayout/_nested-layout/route-a'
@@ -159,19 +147,11 @@ export interface RootRouteChildren {
   DeferredRoute: typeof DeferredRoute
   GameRoute: typeof GameRoute
   LoginRoute: typeof LoginRoute
-  RedirectRoute: typeof RedirectRoute
   ApiUsersRoute: typeof ApiUsersRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/redirect': {
-      id: '/redirect'
-      path: '/redirect'
-      fullPath: '/redirect'
-      preLoaderRoute: typeof RedirectRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/login': {
       id: '/login'
       path: '/login'
@@ -282,7 +262,6 @@ const rootRouteChildren: RootRouteChildren = {
   DeferredRoute: DeferredRoute,
   GameRoute: GameRoute,
   LoginRoute: LoginRoute,
-  RedirectRoute: RedirectRoute,
   ApiUsersRoute: ApiUsersRoute,
 }
 export const routeTree = rootRouteImport
