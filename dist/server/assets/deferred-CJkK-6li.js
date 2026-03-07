@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { d as deferredQueryOptions } from "./router-Df20rmTh.js";
+import { d as deferredQueryOptions } from "./router-CwlGhZRA.js";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { useState, Suspense } from "react";
 import "@tanstack/react-router";

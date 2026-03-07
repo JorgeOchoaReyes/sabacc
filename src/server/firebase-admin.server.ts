@@ -7,15 +7,20 @@ import { getStorage as getAdminStorage } from "firebase-admin/storage";
 function getApp() {
     if (firebase.apps.length > 0) return firebase.app();
 
-    const rawKey = process.env.GCP_SERVICE_ACCOUNT;
+    const rawKey = process.env['FIREBASE_ADMIN_ACCOUNT'];
 
     if (!rawKey) {
         console.error("CRITICAL: GCP_SERVICE_ACCOUNT is missing from environment variables.");
         throw new Error("GCP_SERVICE_ACCOUNT is not defined");
     }
 
+    const decodedKey = Buffer.from(rawKey, 'base64').toString('utf-8');
+
+    const cleanKey = decodedKey
+        .replace(/\n/g, '\\n')
+        .replace(/\r/g, '');
     try {
-        const serviceAccount = JSON.parse(rawKey.replace(/\\n/g, '\n')) as firebase.ServiceAccount;
+        const serviceAccount = JSON.parse(cleanKey) as firebase.ServiceAccount;
         return firebase.initializeApp({
             credential: firebase.credential.cert(serviceAccount),
         });

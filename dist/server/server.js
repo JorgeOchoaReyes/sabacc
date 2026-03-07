@@ -4140,7 +4140,7 @@ let entriesPromise;
 let baseManifestPromise;
 let cachedFinalManifestPromise;
 async function loadEntries() {
-  const routerEntry = await import("./assets/router-Df20rmTh.js").then((n2) => n2.r);
+  const routerEntry = await import("./assets/router-CwlGhZRA.js").then((n2) => n2.r);
   const startEntry = await import("./assets/start-HYkvq4Ni.js");
   return { startEntry, routerEntry };
 }

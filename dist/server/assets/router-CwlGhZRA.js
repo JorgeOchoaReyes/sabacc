@@ -282,7 +282,7 @@ function RootDocument({ children }) {
     ] })
   ] });
 }
-const $$splitComponentImporter$8 = () => import("./login-ClNpZlSJ.js");
+const $$splitComponentImporter$8 = () => import("./login-Cc1bhAIc.js");
 const Route$9 = createFileRoute("/login")({
   component: lazyRouteComponent($$splitComponentImporter$8, "component")
 });
@@ -301,7 +301,7 @@ const deferredQueryOptions = () => queryOptions({
     };
   }
 });
-const $$splitComponentImporter$6 = () => import("./deferred-zkytCCjm.js");
+const $$splitComponentImporter$6 = () => import("./deferred-CJkK-6li.js");
 const Route$7 = createFileRoute("/deferred")({
   loader: ({
     context
@@ -318,16 +318,32 @@ const $$splitComponentImporter$4 = () => import("./_pathlessLayout-BKuQagRO.js")
 const Route$5 = createFileRoute("/_pathlessLayout")({
   component: lazyRouteComponent($$splitComponentImporter$4, "component")
 });
-const $$splitComponentImporter$3 = () => import("./index-N7-OiUXK.js");
+const $$splitComponentImporter$3 = () => import("./index-9rUIw-Jp.js");
 const Route$4 = createFileRoute("/")({
   component: lazyRouteComponent($$splitComponentImporter$3, "component")
 });
-const serviceAccount = JSON.parse(process.env.GCP_SERVICE_ACCOUNT.replace(/\\n/g, "\n"));
-const app = firebase.apps.length === 0 ? firebase.initializeApp({
-  credential: firebase.credential.cert(serviceAccount)
-}) : firebase.app();
-getAuth$1(app);
+function getApp() {
+  if (firebase.apps.length > 0) return firebase.app();
+  const rawKey = process.env["FIREBASE_ADMIN_ACCOUNT"];
+  if (!rawKey) {
+    console.error("CRITICAL: GCP_SERVICE_ACCOUNT is missing from environment variables.");
+    throw new Error("GCP_SERVICE_ACCOUNT is not defined");
+  }
+  const decodedKey = Buffer.from(rawKey, "base64").toString("utf-8");
+  const cleanKey = decodedKey.replace(/\n/g, "\\n").replace(/\r/g, "");
+  try {
+    const serviceAccount = JSON.parse(cleanKey);
+    return firebase.initializeApp({
+      credential: firebase.credential.cert(serviceAccount)
+    });
+  } catch (error) {
+    console.error("CRITICAL: Failed to parse Service Account JSON:", error);
+    throw error;
+  }
+}
+const app = getApp();
 const db = getFirestore(app);
+getAuth$1(app);
 getStorage(app);
 const Route$3 = createFileRoute("/api/users")({
   server: {
