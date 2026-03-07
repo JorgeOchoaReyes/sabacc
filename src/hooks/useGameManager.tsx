@@ -23,6 +23,7 @@ export function useGameManager() {
             table_id: 123,
             table_creator_id: "1",
             table_creator_name: "Player 1",
+
             table_password: "",
             table_password_protected: false,
 
@@ -158,7 +159,6 @@ export function useGameManager() {
         return deck[deck.length - 1] ?? null;
     };
 
-    // Player actions
 
     const userStand = (player_id: string) => {
         if (!table) {
@@ -173,6 +173,7 @@ export function useGameManager() {
             console.log("User hand not found");
             return;
         }
+
         const move: Move = {
             player_id: userHand.player_id,
             prev_card_sun: userHand.hand.card_sun,
