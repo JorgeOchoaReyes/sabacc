@@ -15,7 +15,8 @@ import { Route as DeferredRouteImport } from './routes/deferred'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as PathlessLayoutRouteImport } from './routes/_pathlessLayout'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as ApiUsersRouteImport } from './routes/api/users'
+import { Route as ApiRankRouteImport } from './routes/api/rank'
+import { Route as ApiPlayerRouteImport } from './routes/api/player'
 import { Route as PathlessLayoutNestedLayoutRouteImport } from './routes/_pathlessLayout/_nested-layout'
 import { Route as PathlessLayoutNestedLayoutRouteBRouteImport } from './routes/_pathlessLayout/_nested-layout/route-b'
 import { Route as PathlessLayoutNestedLayoutRouteARouteImport } from './routes/_pathlessLayout/_nested-layout/route-a'
@@ -49,9 +50,14 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiUsersRoute = ApiUsersRouteImport.update({
-  id: '/api/users',
-  path: '/api/users',
+const ApiRankRoute = ApiRankRouteImport.update({
+  id: '/api/rank',
+  path: '/api/rank',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPlayerRoute = ApiPlayerRouteImport.update({
+  id: '/api/player',
+  path: '/api/player',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PathlessLayoutNestedLayoutRoute =
@@ -78,7 +84,8 @@ export interface FileRoutesByFullPath {
   '/deferred': typeof DeferredRoute
   '/game': typeof GameRoute
   '/login': typeof LoginRoute
-  '/api/users': typeof ApiUsersRoute
+  '/api/player': typeof ApiPlayerRoute
+  '/api/rank': typeof ApiRankRoute
   '/route-a': typeof PathlessLayoutNestedLayoutRouteARoute
   '/route-b': typeof PathlessLayoutNestedLayoutRouteBRoute
 }
@@ -88,7 +95,8 @@ export interface FileRoutesByTo {
   '/deferred': typeof DeferredRoute
   '/game': typeof GameRoute
   '/login': typeof LoginRoute
-  '/api/users': typeof ApiUsersRoute
+  '/api/player': typeof ApiPlayerRoute
+  '/api/rank': typeof ApiRankRoute
   '/route-a': typeof PathlessLayoutNestedLayoutRouteARoute
   '/route-b': typeof PathlessLayoutNestedLayoutRouteBRoute
 }
@@ -101,7 +109,8 @@ export interface FileRoutesById {
   '/game': typeof GameRoute
   '/login': typeof LoginRoute
   '/_pathlessLayout/_nested-layout': typeof PathlessLayoutNestedLayoutRouteWithChildren
-  '/api/users': typeof ApiUsersRoute
+  '/api/player': typeof ApiPlayerRoute
+  '/api/rank': typeof ApiRankRoute
   '/_pathlessLayout/_nested-layout/route-a': typeof PathlessLayoutNestedLayoutRouteARoute
   '/_pathlessLayout/_nested-layout/route-b': typeof PathlessLayoutNestedLayoutRouteBRoute
 }
@@ -113,7 +122,8 @@ export interface FileRouteTypes {
     | '/deferred'
     | '/game'
     | '/login'
-    | '/api/users'
+    | '/api/player'
+    | '/api/rank'
     | '/route-a'
     | '/route-b'
   fileRoutesByTo: FileRoutesByTo
@@ -123,7 +133,8 @@ export interface FileRouteTypes {
     | '/deferred'
     | '/game'
     | '/login'
-    | '/api/users'
+    | '/api/player'
+    | '/api/rank'
     | '/route-a'
     | '/route-b'
   id:
@@ -135,7 +146,8 @@ export interface FileRouteTypes {
     | '/game'
     | '/login'
     | '/_pathlessLayout/_nested-layout'
-    | '/api/users'
+    | '/api/player'
+    | '/api/rank'
     | '/_pathlessLayout/_nested-layout/route-a'
     | '/_pathlessLayout/_nested-layout/route-b'
   fileRoutesById: FileRoutesById
@@ -147,7 +159,8 @@ export interface RootRouteChildren {
   DeferredRoute: typeof DeferredRoute
   GameRoute: typeof GameRoute
   LoginRoute: typeof LoginRoute
-  ApiUsersRoute: typeof ApiUsersRoute
+  ApiPlayerRoute: typeof ApiPlayerRoute
+  ApiRankRoute: typeof ApiRankRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -194,11 +207,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/users': {
-      id: '/api/users'
-      path: '/api/users'
-      fullPath: '/api/users'
-      preLoaderRoute: typeof ApiUsersRouteImport
+    '/api/rank': {
+      id: '/api/rank'
+      path: '/api/rank'
+      fullPath: '/api/rank'
+      preLoaderRoute: typeof ApiRankRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/player': {
+      id: '/api/player'
+      path: '/api/player'
+      fullPath: '/api/player'
+      preLoaderRoute: typeof ApiPlayerRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_pathlessLayout/_nested-layout': {
@@ -262,7 +282,8 @@ const rootRouteChildren: RootRouteChildren = {
   DeferredRoute: DeferredRoute,
   GameRoute: GameRoute,
   LoginRoute: LoginRoute,
-  ApiUsersRoute: ApiUsersRoute,
+  ApiPlayerRoute: ApiPlayerRoute,
+  ApiRankRoute: ApiRankRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
