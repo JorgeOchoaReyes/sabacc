@@ -57,7 +57,7 @@ export const Card: React.FC<{
         whileDrag={{ scale: locked ? 1 : 1.2, }}
         dragMomentum={false}
         dragConstraints={{ top: 0, left: 0, right: 0, bottom: 0 }}
-        className="w-36 h-38 cursor-pointer object-cover flex flex-col justify-center items-center"
+        className="w-22 h-24 cursor-pointer object-cover flex flex-col justify-center items-center"
         onClick={() => {
           if (onClickDeckCards) onClickDeckCards();
           if (onClickOnSelectingCard) {
@@ -69,8 +69,8 @@ export const Card: React.FC<{
       >
         <img
           src={backgroundImagePaths[card ?? "moon_back"] ?? "/deck/sand/back_sand.png"}
-          width={120}
-          height={100}
+          width={80}
+          height={60}
           alt="card"
           className="unselectable"
         />
