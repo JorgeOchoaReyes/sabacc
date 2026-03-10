@@ -3,6 +3,9 @@
   "private": true,
   "sideEffects": false,
   "type": "module",
+  "engines": {
+    "node": "20.x"
+  },
   "scripts": {
     "dev": "vite dev",
     "build": "vite build && tsc --noEmit",
@@ -27,8 +30,7 @@
     "srvx": "^0.11.9",
     "tailwind-merge": "^2.6.0"
   },
-  "devDependencies": {
-    "@netlify/vite-plugin-tanstack-start": "^1.2.18",
+  "devDependencies": { 
     "@tailwindcss/vite": "^4.1.18",
     "@types/node": "^22.5.4",
     "@types/react": "^19.0.8",
