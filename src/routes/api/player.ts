@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { db } from '../../server/firebase-admin.server'
+// import { db } from '../../server/firebase-admin.server'
 import { withAuth } from '../../server/auth'
 
 export const Route = createFileRoute('/api/player')({
