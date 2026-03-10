@@ -7,7 +7,7 @@ import { getStorage as getAdminStorage } from "firebase-admin/storage";
 function getApp() {
     if (firebase.apps.length > 0) return firebase.app();
 
-    const rawKey = process.env['FIREBASE_ADMIN_ACCOUNT'];
+    const rawKey = process.env['GCP_ADMIN_ACCOUNT'];
 
     if (!rawKey) {
         console.error("CRITICAL: GCP_SERVICE_ACCOUNT is missing from environment variables.");
