@@ -9,6 +9,7 @@ export default defineConfig({
   server: {
     port: 3000,
   },
+  
   plugins: [
     tailwindcss(),
     tsConfigPaths({
@@ -16,8 +17,14 @@ export default defineConfig({
     }),
     tanstackStart(),
     nitro({
-
+      
     }),
     viteReact(),
   ],
+  ssr: { 
+      external: ['firebase-admin'],
+    },
+    optimizeDeps: { 
+      exclude: ['firebase-admin'],
+  },
 })  
