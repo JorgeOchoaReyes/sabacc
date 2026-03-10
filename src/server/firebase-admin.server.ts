@@ -1,5 +1,5 @@
 import '@tanstack/react-start/server-only'
-import firebase from "firebase-admin"; 
+import * as firebase from 'firebase-admin';
 
 function getApp() {
     if (firebase.apps.length > 0) return firebase.app();
