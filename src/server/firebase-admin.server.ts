@@ -1,8 +1,5 @@
 import '@tanstack/react-start/server-only'
-import firebase from "firebase-admin";
-import { getAuth as getAdminAuth } from "firebase-admin/auth";
-import { getFirestore as getAdminFirestore } from "firebase-admin/firestore";
-import { getStorage as getAdminStorage } from "firebase-admin/storage";
+import firebase from "firebase-admin"; 
 
 function getApp() {
     if (firebase.apps.length > 0) return firebase.app();
@@ -31,6 +28,6 @@ function getApp() {
 }
 
 export const app = getApp();
-export const db = getAdminFirestore(app);
-export const auth = getAdminAuth(app);
-export const storage = getAdminStorage(app);
+export const db = firebase.firestore(app);
+export const auth = firebase.auth(app);
+export const storage = firebase.storage(app);
