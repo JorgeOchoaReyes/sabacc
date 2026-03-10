@@ -20,11 +20,5 @@ export default defineConfig({
       
     }),
     viteReact(),
-  ],
-  ssr: { 
-      external: ['firebase-admin'],
-    },
-    optimizeDeps: { 
-      exclude: ['firebase-admin'],
-  },
+  ]
 })  

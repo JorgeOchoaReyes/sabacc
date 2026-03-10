@@ -8,11 +8,10 @@ export const Route = createFileRoute('/api/rank')({
       GET: async ({ request }) => {
         return withAuth(request, async (user) => {
           try {
-            const data = await db.collection('users').doc(user.uid).get();
+            // const data = await db.collection('users').doc(user.uid).get();
 
-            return Response.json({
-              uid: user.uid,
-              data: data.data()
+            return Response.json({ 
+              message: `Hello, ${user.email}! This is your rank data.`
             })
           } catch (error) {
             console.error(error)
