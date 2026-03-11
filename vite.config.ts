@@ -9,6 +9,14 @@ export default defineConfig({
   server: {
     port: 3000,
   },
+  build: {
+    rollupOptions: {
+      external: ['firebase-admin'],
+    }
+  },
+  ssr: {
+    external: ['firebase-admin'],
+  },
   plugins: [
     tsConfigPaths({
       projects: ['./tsconfig.json'],
@@ -17,9 +25,15 @@ export default defineConfig({
     tanstackStart(),
     viteReact(),
     nitro({
-      preset: 'node-server',
-      rollupConfig: {
-        external: ['firebase-admin'],
+      // @ts-ignore
+      externals: {
+        external: [
+          'firebase-admin',
+          'google-auth-library',
+          'gaxios',
+          'gtoken',
+          'google-p12-pem'
+        ],
       },
     }),
   ]

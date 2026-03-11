@@ -1,34 +1,40 @@
-import '@tanstack/react-start/server-only'
-import { createRequire } from 'module';
-const require = createRequire(import.meta.url);
+import admin from 'firebase-admin';
 
-let admin: typeof import('firebase-admin') | null = null;
+if (admin && admin.apps && admin.apps.length === 0) {
+    try {
+        const projectId = process.env["PROJECT_ID"];
+        const clientEmail = process.env["CLIENT_EMAIL"];
+        let privateKey = process.env["PRIVATE_KEY"];
 
-export function getAdmin() {
-    if (!admin) {
-        admin = require('firebase-admin');
-        if (admin && admin.apps.length === 0) {
-            try {
-                const serviceAccount = {
-                    projectId: process.env["PROJECT_ID"],
-                    clientEmail: process.env["CLIENT_EMAIL"],
-                    privateKey: process.env["PRIVATE_KEY"]?.replace(/\\n/g, '\n'),
-                };
-                admin.initializeApp({
-                    credential: admin.credential.cert(serviceAccount),
-                });
-            } catch (error) {
-                console.error("CRITICAL: Failed to initialize Firebase Admin:", error);
-                throw error;
+        if (privateKey) {
+            privateKey = privateKey.replace(/\\n/g, '\n');
+            if (privateKey.startsWith('"') && privateKey.endsWith('"')) {
+                privateKey = privateKey.slice(1, -1);
             }
         }
+
+        const serviceAccount = {
+            projectId,
+            clientEmail,
+            privateKey,
+        };
+
+        if (serviceAccount.projectId && serviceAccount.clientEmail && serviceAccount.privateKey) {
+            admin.initializeApp({
+                credential: admin.credential.cert(serviceAccount),
+            });
+        } else {
+            admin.initializeApp();
+        }
+    } catch (error) {
+        console.error("CRITICAL: Failed to initialize Firebase Admin:", error);
+        throw error;
     }
-    return admin!;
 }
 
-export const app = getAdmin().app();
-
-export const db = getAdmin().firestore();
-export const auth = getAdmin().auth();
-export const storage = getAdmin().storage();
+export { admin };
+export const app = admin.app();
+export const db = admin.firestore();
+export const auth = admin.auth();
+export const storage = admin.storage();
 
