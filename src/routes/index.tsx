@@ -9,7 +9,7 @@ function LandingPage() {
   const { user, loading } = useAuth()
 
   return (
-    <div className="min-h-screen bg-base-100 flex flex-col"> s
+    <div className="min-h-screen bg-base-100 flex flex-col">
       <div className="navbar bg-base-100/80 backdrop-blur-md sticky top-0 z-50 border-b border-base-200">
         <div className="navbar-start">
           <div className="dropdown">

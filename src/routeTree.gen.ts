@@ -14,7 +14,6 @@ import { Route as GameRouteImport } from './routes/game'
 import { Route as DeferredRouteImport } from './routes/deferred'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as ApiRankRouteImport } from './routes/api/rank'
 import { Route as ApiPlayerRouteImport } from './routes/api/player'
 
 const LoginRoute = LoginRouteImport.update({
@@ -42,11 +41,6 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiRankRoute = ApiRankRouteImport.update({
-  id: '/api/rank',
-  path: '/api/rank',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ApiPlayerRoute = ApiPlayerRouteImport.update({
   id: '/api/player',
   path: '/api/player',
@@ -60,7 +54,6 @@ export interface FileRoutesByFullPath {
   '/game': typeof GameRoute
   '/login': typeof LoginRoute
   '/api/player': typeof ApiPlayerRoute
-  '/api/rank': typeof ApiRankRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -69,7 +62,6 @@ export interface FileRoutesByTo {
   '/game': typeof GameRoute
   '/login': typeof LoginRoute
   '/api/player': typeof ApiPlayerRoute
-  '/api/rank': typeof ApiRankRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -79,7 +71,6 @@ export interface FileRoutesById {
   '/game': typeof GameRoute
   '/login': typeof LoginRoute
   '/api/player': typeof ApiPlayerRoute
-  '/api/rank': typeof ApiRankRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -90,16 +81,8 @@ export interface FileRouteTypes {
     | '/game'
     | '/login'
     | '/api/player'
-    | '/api/rank'
   fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/'
-    | '/dashboard'
-    | '/deferred'
-    | '/game'
-    | '/login'
-    | '/api/player'
-    | '/api/rank'
+  to: '/' | '/dashboard' | '/deferred' | '/game' | '/login' | '/api/player'
   id:
     | '__root__'
     | '/'
@@ -108,7 +91,6 @@ export interface FileRouteTypes {
     | '/game'
     | '/login'
     | '/api/player'
-    | '/api/rank'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -118,7 +100,6 @@ export interface RootRouteChildren {
   GameRoute: typeof GameRoute
   LoginRoute: typeof LoginRoute
   ApiPlayerRoute: typeof ApiPlayerRoute
-  ApiRankRoute: typeof ApiRankRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -158,13 +139,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/rank': {
-      id: '/api/rank'
-      path: '/api/rank'
-      fullPath: '/api/rank'
-      preLoaderRoute: typeof ApiRankRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/api/player': {
       id: '/api/player'
       path: '/api/player'
@@ -182,7 +156,6 @@ const rootRouteChildren: RootRouteChildren = {
   GameRoute: GameRoute,
   LoginRoute: LoginRoute,
   ApiPlayerRoute: ApiPlayerRoute,
-  ApiRankRoute: ApiRankRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

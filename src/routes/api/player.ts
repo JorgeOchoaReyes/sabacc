@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
-// import { db } from '../../server/firebase-admin.server'
+import { db } from '../../server/firebase-admin.server'
 import { withAuth } from '../../server/auth'
 
 export const Route = createFileRoute('/api/player')({
@@ -8,12 +8,11 @@ export const Route = createFileRoute('/api/player')({
       GET: async ({ request }) => {
         return withAuth(request, async (user) => {
           try {
-            // const data = await db.collection('test').doc('test').get();
+            const data = await db.collection('test').doc('test').get();
 
             return Response.json({
-              // uid: user.uid,
-              // data: data.data()
-              message: `Hello, ${user.email}! This is your player data.`
+              uid: user.uid,
+              data: data.data()
             })
           } catch (error) {
             console.error(error)
