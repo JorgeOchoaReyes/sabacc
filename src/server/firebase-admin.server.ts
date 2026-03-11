@@ -1,29 +1,34 @@
-// import '@tanstack/react-start/server-only'
-// import firebase from 'firebase-admin';
-// import { getAuth as getAdminAuth } from "firebase-admin/auth";
-// import { getFirestore as getAdminFirestore } from "firebase-admin/firestore";
-// import { getStorage as getAdminStorage } from "firebase-admin/storage";
+import '@tanstack/react-start/server-only'
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
 
-// function getApp() {
-//     if (firebase?.apps?.length > 0) return firebase.app();
+let admin: typeof import('firebase-admin') | null = null;
 
-//     try {
-//         const serviceAccount: firebase.ServiceAccount = {
-//             projectId: process.env["PROJECT_ID"],
-//             clientEmail: process.env["CLIENT_EMAIL"],
-//             privateKey: process.env["PRIVATE_KEY"]?.replace(/\\n/g, '\n'),
-//         };
+export function getAdmin() {
+    if (!admin) {
+        admin = require('firebase-admin');
+        if (admin && admin.apps.length === 0) {
+            try {
+                const serviceAccount = {
+                    projectId: process.env["PROJECT_ID"],
+                    clientEmail: process.env["CLIENT_EMAIL"],
+                    privateKey: process.env["PRIVATE_KEY"]?.replace(/\\n/g, '\n'),
+                };
+                admin.initializeApp({
+                    credential: admin.credential.cert(serviceAccount),
+                });
+            } catch (error) {
+                console.error("CRITICAL: Failed to initialize Firebase Admin:", error);
+                throw error;
+            }
+        }
+    }
+    return admin!;
+}
 
-//         return firebase.initializeApp({
-//             credential: firebase.credential.cert(serviceAccount),
-//         });
-//     } catch (error) {
-//         console.error("CRITICAL: Failed to parse Service Account JSON:", error);
-//         throw error;
-//     }
-// }
+export const app = getAdmin().app();
 
-// export const app = getApp();
-// export const db = getAdminFirestore(app);
-// export const auth = getAdminAuth(app);
-// export const storage = getAdminStorage(app);
+export const db = getAdmin().firestore();
+export const auth = getAdmin().auth();
+export const storage = getAdmin().storage();
+
