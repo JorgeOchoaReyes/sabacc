@@ -6,22 +6,22 @@ export const Route = createFileRoute('/api/player')({
   server: {
     handlers: {
       GET: async ({ request }) => {
-        // return withAuth(request, async (user) => {
-        try {
-          const data = await db.collection('test').doc('test').get();
+        return withAuth(request, async (user) => {
+          try {
+            const data = await db.collection('test').doc('test').get();
 
-          return Response.json({
-            // uid: user.uid,
-            data: data.data()
-          })
-        } catch (error) {
-          console.error(error)
-          return Response.json(
-            { error: error },
-            { status: 500 }
-          )
-        }
-        // });
+            return Response.json({
+              uid: user.uid,
+              data: data.data()
+            })
+          } catch (error) {
+            console.error(error)
+            return Response.json(
+              { error: error },
+              { status: 500 }
+            )
+          }
+        });
       },
     },
   },
