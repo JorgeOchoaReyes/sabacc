@@ -16,6 +16,10 @@ export default defineConfig({
     tailwindcss(),
     tanstackStart(),
     viteReact(),
-    nitro(),
+    nitro({
+      rollupConfig: {
+        external: ['firebase-admin'],
+      }
+    }),
   ]
 })  
