@@ -9,16 +9,16 @@ export default defineConfig({
   server: {
     port: 3000,
   },
-  
   plugins: [
-    tailwindcss(),
     tsConfigPaths({
       projects: ['./tsconfig.json'],
     }),
+    tailwindcss(),
     tanstackStart(),
-    nitro({
-      
-    }),
     viteReact(),
+    nitro({
+      preset: 'node-server',
+      sourcemap: true,
+    }),
   ]
 })  
