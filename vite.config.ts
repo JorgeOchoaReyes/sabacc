@@ -17,9 +17,10 @@ export default defineConfig({
     tanstackStart(),
     viteReact(),
     nitro({
+      preset: 'node-server',
       rollupConfig: {
         external: ['firebase-admin'],
-      }
+      },
     }),
   ]
 })  
