@@ -7,7 +7,7 @@
     "dev": "vite dev",
     "build": "vite build && tsc --noEmit",
     "preview": "vite preview",
-    "start": "pnpx srvx --prod -s ../client dist/server/server.js"
+    "start": "node .output/server/index.mjs"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.90.0",
@@ -38,5 +38,8 @@
     "typescript": "^5.7.2",
     "vite": "^7.3.1",
     "vite-tsconfig-paths": "^5.1.4"
-  }
+  },
+  "bundledDependencies": [
+    "firebase-admin"
+  ]
 }
