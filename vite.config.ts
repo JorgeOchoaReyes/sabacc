@@ -10,7 +10,7 @@ export default defineConfig({
     port: 3000,
   },
   ssr: {
-    noExternal: [
+    external: [
       'firebase-admin',
       'google-auth-library',
       'gaxios',
@@ -25,6 +25,17 @@ export default defineConfig({
     tailwindcss(),
     tanstackStart(),
     viteReact(),
-    nitro({}),
+    nitro({
+      // @ts-ignore
+      externals: {
+        external: [
+          'firebase-admin',
+          'google-auth-library',
+          'gaxios',
+          'gtoken',
+          'google-p12-pem'
+        ],
+      },
+    }),
   ]
 })  
