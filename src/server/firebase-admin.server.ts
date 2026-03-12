@@ -1,6 +1,4 @@
-import { createRequire } from 'module';
-const require = createRequire(import.meta.url);
-const admin = require('firebase-admin');
+import admin from 'firebase-admin';
 
 if (admin && admin.apps && admin.apps.length === 0) {
     try {
