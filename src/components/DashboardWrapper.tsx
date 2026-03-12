@@ -10,6 +10,7 @@ export function DashboardWrapper({ children }: { children: React.ReactNode }) {
     const { user, loading } = useAuth()
     const router = useRouter()
     const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+    const [isDesktopSidebarOpen, setIsDesktopSidebarOpen] = useState(true)
     const location = useLocation()
 
     useEffect(() => {
@@ -44,7 +45,7 @@ export function DashboardWrapper({ children }: { children: React.ReactNode }) {
     }
 
     return (
-        <div className="drawer lg:drawer-open bg-base-200 min-h-[90vh]">
+        <div className={`drawer ${isDesktopSidebarOpen ? 'lg:drawer-open' : ''} bg-base-200 min-h-[90vh]`}>
             <input id="dashboard-drawer" type="checkbox" className="drawer-toggle" checked={isSidebarOpen} onChange={(e) => setIsSidebarOpen(e.target.checked)} />
 
             {/* Main Content Area */}
@@ -55,6 +56,12 @@ export function DashboardWrapper({ children }: { children: React.ReactNode }) {
                         <label htmlFor="dashboard-drawer" aria-label="open sidebar" className="btn btn-square btn-ghost">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-6 h-6 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                         </label>
+                    </div>
+
+                    <div className="flex-none hidden lg:block">
+                        <button onClick={() => setIsDesktopSidebarOpen(!isDesktopSidebarOpen)} className="btn btn-square btn-ghost">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-6 h-6 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                        </button>
                     </div>
 
                     <div className="flex-1 px-2 mx-2 font-bold text-xl hidden lg:block">Overview</div>
@@ -94,7 +101,7 @@ export function DashboardWrapper({ children }: { children: React.ReactNode }) {
                         <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-primary-content">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5"><path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 6a.75.75 0 0 0-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 0 0 0-1.5h-3.75V6Z" clipRule="evenodd" /></svg>
                         </div>
-                        <span>Sabacc.inc</span>
+                        <span>Sabacc</span>
                     </div>
 
                     <ul className="flex-1 flex flex-col gap-1">
@@ -102,7 +109,7 @@ export function DashboardWrapper({ children }: { children: React.ReactNode }) {
                         <li className={location.pathname === '/dashboard' ? 'active bg-base-200' : ''}><button onClick={handleDashboard}><svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>Dashboard</button></li>
                         <li className={location.pathname === '/game' ? 'active bg-base-200' : ''}><button onClick={handleGame}><Gamepad className="w-4" /> Game</button></li>
 
-                        <li className="menu-title mt-4 text-xs font-semibold px-2 pb-2">Settings</li>``
+                        <li className="menu-title mt-4 text-xs font-semibold px-2 pb-2">Settings</li>
                         <li><a><svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>General Settings</a></li>
                         <li><a><svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>Security</a></li>
                     </ul>

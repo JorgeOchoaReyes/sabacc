@@ -17,3 +17,6 @@ yarn.lock
 /blob-report/
 /playwright/.cache/
 
+
+# Local Netlify folder
+.netlify

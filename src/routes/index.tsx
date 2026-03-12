@@ -10,7 +10,6 @@ function LandingPage() {
 
   return (
     <div className="min-h-screen bg-base-100 flex flex-col">
-      {/* Navbar */}
       <div className="navbar bg-base-100/80 backdrop-blur-md sticky top-0 z-50 border-b border-base-200">
         <div className="navbar-start">
           <div className="dropdown">
@@ -57,10 +56,10 @@ function LandingPage() {
       </div>
 
       <main className="flex-1">
-        <section className="relative pt-20 pb-32 overflow-hidden mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full">
+        <section className="relative pt-10 pb-32 overflow-hidden mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[600px] bg-gradient-to-b from-primary/10 to-transparent -z-10 rounded-b-full blur-3xl opacity-50"></div>
 
-          <div className="text-center mt-12 mb-16 max-w-4xl mx-auto">
+          <div className="text-center mb-16 max-w-4xl mx-auto">
             <div className="inline-block mb-6 relative">
               <div className="absolute inset-0 bg-secondary/20 blur-xl rounded-full"></div>
               <span className="relative badge badge-secondary badge-outline border-secondary/50 px-4 py-3 uppercase tracking-widest text-xs font-bold shadow-xl shadow-secondary/10">

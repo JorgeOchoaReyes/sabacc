@@ -1,42 +1,53 @@
-# TanStack Start - Basic React Query Example
+# Sabacc
 
-A TanStack Start example demonstrating integration with TanStack Query (React Query).
+Welcome to the Sabacc project! This is a digital implementation of the legendary card game played throughout the Star Wars galaxy.
 
-- [TanStack Router Docs](https://tanstack.com/router)
-- [TanStack Query Docs](https://tanstack.com/query)
+## What is Sabacc?
 
-## Start a new project based on this example
+Sabacc is a popular high-stakes card game played throughout the galaxy, known for its mix of skill, strategy, and unpredictability. The objective of the game is to build a hand with a value as close to zero as possible (often referred to as a "Sabacc" or "Pure Sabacc").
 
-To start a new project based on this example, run:
+The game is famously known as the one where Han Solo won the Millennium Falcon from Lando Calrissian.
 
-```sh
-npx gitpick TanStack/router/tree/main/examples/react/start-basic-react-query start-basic-react-query
-```
+### Basic Rules
+
+- **The Deck**: Played with a specialized deck containing positive (Sun) and negative (Blood) cards.
+- **The Goal**: Reach a hand value closest to zero. A hand of exactly zero is a Pure Sabacc.
+- **Gameplay**: Players draw, swap, or stand with their cards across multiple turns.
+- **The Twist**: In traditional Sabacc, card values can randomly "shift" unless placed in the interference field, adding a layer of chaos to the strategy.
+
+## Project Structure
+
+This project is built using modern web technologies to provide a seamless and responsive gaming experience:
+
+- **Framework**: React with TanStack Start/Router for robust routing and SSR capabilities.
+- **Styling**: Tailwind CSS and DaisyUI for a beautiful, responsive, and themable interface.
+- **Backend/Auth**: Firebase Admin for secure authentication and database management.
+- **State Management**: TanStack Query for efficient server state and data fetching.
 
 ## Getting Started
 
-From your terminal:
+To run this project locally:
 
-```sh
-pnpm install
-pnpm dev
-```
+1. **Install dependencies**:
 
-This starts your app in development mode, rebuilding assets on file changes.
+   ```bash
+   pnpm install
+   ```
 
-## Build
+2. **Run the development server**:
 
-To build the app for production:
+   ```bash
+   pnpm run dev
+   ```
 
-```sh
-pnpm build
-```
+3. **Build for production**:
 
-## TanStack Query Integration
+   ```bash
+   pnpm run build
+   ```
 
-This example demonstrates how to use TanStack Query with TanStack Start for:
+## Contributing
 
-- Server-side data fetching
-- Client-side caching and synchronization
-- Optimistic updates
-- Automatic refetching
+Contributions are welcome! Whether it's adding new game mechanics, improving the AI, or refining the UI, feel free to open a pull request.
+
+May the Force be with you at the Sabacc table!

@@ -13,15 +13,6 @@ import { motion } from "framer-motion";
 import type { DivOrNull, Moon_Card, Sun_Card } from "~/utils/classes";
 import { freeCardHideAndOutOfWindowView, onClickDeckMoveFreeCardToDeckCard } from "~/utils/motions";
 
-const imageStyle = {
-    backgroundImage: "url(/deck/table.png)",
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    backgroundRepeat: "no-repeat",
-    backgroundColor: "rgba(255,255,255,0.3)",
-    backgroundBlendMode: "lighten"
-};
-
 export default function Home() {
     const router = useRouter();
     const id = "12";
@@ -67,15 +58,8 @@ export default function Home() {
     });
 
     return (
-        <div className="overflow-hidden bg-[#a17c3d]" style={imageStyle}>
-            <button className="fixed top-5 left-5" onClick={async () => {
-                await router.navigate({
-                    to: "/dashboard"
-                });
-            }}>
-                <ArrowLeft size={64} />
-            </button>
-            <div className="fixed top-5 left-[5rem] border-[#9dfaee] p-4 bg-[#302d25] h-24 w-80 rounded-xl">
+        <div className="w-full h-full bg-[#a17c3d]" >
+            <div className="fixed top-20 left-2/10 border-[#9dfaee] p-4 bg-[#302d25] h-24 w-80 rounded-xl">
                 <div className="text-[#9dfaee] text-start flex justify-between w-full">
                     <div> Scoreboard {id}    </div>
                 </div>
@@ -89,7 +73,7 @@ export default function Home() {
                 }
             </div>
 
-            <div className="fixed top-5 right-[5rem] border-[#9dfaee] p-4 bg-[#302d25] h-24 w-80 rounded-xl">
+            <div className="fixed top-20 right-10 border-[#9dfaee] p-4 bg-[#302d25] h-24 w-80 rounded-xl">
                 <div className="text-[#9dfaee] text-start flex justify-between w-full">
                     <div> Table ID: {id}    </div>
                     <div> Turn {table?.turn ?? 0} / {table?.max_turns ?? 0} </div>
@@ -103,8 +87,8 @@ export default function Home() {
                 </p>
             </div>
             {
-                table ? <div className="flex w-[100vw] h-[100vh] items-center justify-center content-center overflow">
-                    <div className="flex flex-col gap-4 p-4 w-[100vw] h-[100vh] items-center justify-start rounded-lg overflow-hidden">
+                table ? <div className="flex w-full h-full items-center justify-center content-center overflow">
+                    <div className="flex flex-col gap-4 p-4 w-full h-full items-center justify-start rounded-lg overflow-hidden">
                         <OpponentCards
                             side="top"
                             playerLeft={!table.players.find((p) => p.player_id === "3")}
@@ -247,7 +231,7 @@ export default function Home() {
                         </div>
                     </div>
                 </div> :
-                    <div className="flex w-[100vw] h-[100vh] min-h-[100vh] min-w-[100vw] items-center justify-center content-center overflow">
+                    <div className="flex w-full h-full items-center justify-center content-center overflow">
                         <button onClick={startGame} className="">
                             Start game
                         </button>

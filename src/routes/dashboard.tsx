@@ -1,6 +1,4 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { DashboardWrapper } from '~/components/DashboardWrapper'
-
 
 export const Route = createFileRoute('/dashboard')({
     component: DashboardLayout,
